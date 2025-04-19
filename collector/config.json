@@ -1,0 +1,13 @@
+{
+    "mock": false,
+    "MR": {
+        "dependencies": [
+            "pfjLUfGv"
+        ],
+        "optional": [],
+        "project_id": "5qDfsQJD"
+    },
+    "CF": {
+        "project_id": "1246565"
+    }
+}

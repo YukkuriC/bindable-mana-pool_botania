@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[${fml_version},)"
+issueTrackerURL = "https://github.com/YukkuriC/bindable-mana-pool_botania/issues"
+license = "MIT"
+
+[[mods]]
+modId = "bindable_mana_pool"
+version = "${version}"
+displayName = "Bindable Mana Pool"
+authors = "YukkuriC"
+description = '''
+An addon of Botania about some enhancements / un-nerfs which are kind of overpowered.
+'''
+logoFile = "logo.png"
+updateJSONURL = "https://api.modrinth.com/updates/5qDfsQJD/forge_updates.json"
+displayURL = "https://modrinth.com/mod/bindable-mana-pool"
+
+[[dependencies.bindable_mana_pool]]
+modId = "forge"
+mandatory = true
+versionRange = "[${fml_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bindable_mana_pool]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraft_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bindable_mana_pool]]
+modId = "botania"
+mandatory = true
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
+

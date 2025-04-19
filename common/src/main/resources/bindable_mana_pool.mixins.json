@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "io.yukkuric.bindable_mana_pool.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "MixinManaPool"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
