@@ -25,7 +25,7 @@ side = "BOTH"
 [[dependencies.bindable_mana_pool]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[${minecraft_version},)"
+versionRange = "[1.19,)"
 ordering = "NONE"
 side = "BOTH"
 
