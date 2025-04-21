@@ -11,7 +11,7 @@ try:
         cfRaw = json.load(f)
         version_map_curseforge = {}
         for src, dst in version_map_modrinth.items():
-            version_map_curseforge[src] = [cfRaw[d] for d in dst if d in cfRaw]
+            version_map_curseforge[src] = sorted([cfRaw[d] for d in dst if d in cfRaw])
 except Exception as e:
     import traceback
     traceback.print_exc(e)
@@ -42,8 +42,7 @@ def push_file(file):
     print("UPLOADING:", filename)
     filename_body, filename_ext = os.path.splitext(filename)
     [mod_name, platform, game_version, mod_version] = filename_body.split('-')
-    mod_version_full = f"{game_version}-{mod_version}"
-    filename = mod_version_full + filename_ext
+    filename = f'{mod_name}-{platform}-{mod_version}' + filename_ext
 
     # https://docs.modrinth.com/api/operations/createversion/
     if "modrinth":
@@ -60,11 +59,11 @@ def push_file(file):
             "dependency_type": "optional"
         } for dep in CFG['MR']["optional"]]
         data = {
-            "name": filename_body,
-            "version_number": mod_version_full,
+            "name": filename,
+            "version_number": mod_version,
             "changelog": CHANGELOG,
             "dependencies": dep,
-            "game_versions": [game_version],
+            "game_versions": version_map_modrinth.get(game_version, []),
             "version_type": "release",
             "loaders": [platform],
             "featured": True,
@@ -93,7 +92,7 @@ def push_file(file):
                 *(9638, 9639),
                 8326,  # java 17
                 7498 if platform == 'forge' else 7499,  # forge or fabric
-                9366 if game_version == '1.19.2' else 9990  # 1.19.2 or 1.20.1
+                *(version_map_curseforge.get(game_version, []))  # version range
             ],
             "releaseType": "release",
         }
@@ -120,7 +119,7 @@ def pick_versions():
     data = json.loads(versions.text)
     versionByName = {}
     for entry in data:
-        if entry["gameVersionTypeID"] == 1:
+        if entry["gameVersionTypeID"] == 75125:
             versionByName[entry['name']] = entry['id']
     with open('versionByName.json', 'w') as f:
         json.dump(versionByName, f)
