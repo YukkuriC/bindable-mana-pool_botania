@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "Bindable Mana Pool"
 authors = "YukkuriC"
 description = '''
-An addon of Botania about some enhancements / un-nerfs which are kind of overpowered.
+A tiny mixin addon of Botania, which makes generator flowers able to output to mana pools directly.
 '''
 logoFile = "logo.png"
 updateJSONURL = "https://api.modrinth.com/updates/5qDfsQJD/forge_updates.json"

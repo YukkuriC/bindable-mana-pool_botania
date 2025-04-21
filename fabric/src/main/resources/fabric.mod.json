@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "id": "botania_overpowered",
+  "id": "bindable_mana_pool",
   "version": "${version}",
-  "name": "BotaniaOverpowered",
-  "description": "An addon of Botania about some enhancements / un-nerfs which are kind of overpowered.",
+  "name": "BindableManaPool",
+  "description": "A tiny mixin addon of Botania, which makes generator flowers able to output to mana pools directly.",
   "authors": [
     "YukkuriC"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/botaniaoverpowered",
-    "sources": "https://github.com/YukkuriC/BotaniaOverpowered",
-    "issues": "https://github.com/YukkuriC/BotaniaOverpowered/issues"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/bindable-mana-pool",
+    "sources": "https://github.com/YukkuriC/bindable-mana-pool_botania",
+    "issues": "https://github.com/YukkuriC/bindable-mana-pool_botania/issues"
   },
   "license": "MIT",
   "icon": "logo.png",
