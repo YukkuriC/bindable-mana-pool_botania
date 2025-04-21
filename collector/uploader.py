@@ -3,6 +3,20 @@ from functools import partial
 
 opentext = partial(open, encoding='utf-8')
 
+version_map_modrinth = {
+    "1.19.2": ['1.19', '1.20'] + [f'1.19.{x}' for x in range(1, 5)] + [f'1.20.{x}' for x in range(1, 7)]
+}
+try:
+    with open('versionByName.json', 'r') as f:
+        cfRaw = json.load(f)
+        version_map_curseforge = {}
+        for src, dst in version_map_modrinth.items():
+            version_map_curseforge[src] = [cfRaw[d] for d in dst if d in cfRaw]
+except Exception as e:
+    import traceback
+    traceback.print_exc(e)
+    exit()
+
 with opentext('secrets.json') as f:
     SECRETS = json.load(f)
 
@@ -26,9 +40,10 @@ if CFG.get('mock'):
 def push_file(file):
     filename = os.path.basename(file)
     print("UPLOADING:", filename)
-    filename_body = os.path.splitext(filename)[0]
+    filename_body, filename_ext = os.path.splitext(filename)
     [mod_name, platform, game_version, mod_version] = filename_body.split('-')
     mod_version_full = f"{game_version}-{mod_version}"
+    filename = mod_version_full + filename_ext
 
     # https://docs.modrinth.com/api/operations/createversion/
     if "modrinth":
@@ -102,6 +117,13 @@ def pick_versions():
     versions = requests.get("https://minecraft.curseforge.com/api/game/versions", headers=header)
     with opentext('versions.json', 'w') as f:
         print(versions.text, file=f)
+    data = json.loads(versions.text)
+    versionByName = {}
+    for entry in data:
+        if entry["gameVersionTypeID"] == 1:
+            versionByName[entry['name']] = entry['id']
+    with open('versionByName.json', 'w') as f:
+        json.dump(versionByName, f)
 
     exit()
 

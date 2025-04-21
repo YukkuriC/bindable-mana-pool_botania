@@ -1,5 +1,6 @@
 *.jar
 secrets.json
 versions.json
+versionByName.json
 changelog.md
 __pycache__
